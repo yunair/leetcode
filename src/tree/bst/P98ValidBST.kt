@@ -25,12 +25,6 @@ class P98ValidBST {
             return false
         }
 
-        if (!isValidBSTSolve(node.left, lower, value)) {
-            return false
-        }
-        if (!isValidBSTSolve(node.right, value, upper)) {
-            return false
-        }
-        return true
+        return isValidBSTSolve(node.left, lower, value) && isValidBSTSolve(node.right, value, upper)
     }
 }

@@ -6,31 +6,31 @@ import util.TreeUtil
 /**
  * 从前序与中序遍历序列构造二叉树
  */
-class P105ConstructFromPreInOrder {
+class P106ConstructFromInPostOrder {
     /**
      * 找到如何区分左右子树的方式
      */
-    fun buildTree(pre: IntArray, inorder: IntArray): TreeNode? {
-        val size = pre.size
+    fun buildTree(inorder: IntArray, postorder: IntArray): TreeNode? {
+        val size = postorder.size
         if (size == 0) {
             return null
         }
-        val root = TreeNode(pre[0])
+        val root = TreeNode(postorder[postorder.size - 1])
         if (size == 1) {
             return root
         }
 
-        val rootIndex = inorder.indexOf(pre[0])
-        root.left = buildTree(pre.copyOfRange(1, rootIndex + 1), inorder.copyOfRange(0, rootIndex))
+        val rootIndex = inorder.indexOf(postorder[postorder.size - 1])
+        root.left = buildTree(inorder.copyOfRange(0, rootIndex), postorder.copyOfRange(0, rootIndex))
         root.right = buildTree(
-            pre.copyOfRange(1 + rootIndex, size),
-            inorder.copyOfRange(rootIndex + 1, size)
+            inorder.copyOfRange(rootIndex + 1, size),
+            postorder.copyOfRange(rootIndex, size - 1)
         )
         return root
     }
 }
 
 fun main() {
-    val test = P105ConstructFromPreInOrder()
-    TreeUtil.printTreeNode(test.buildTree(intArrayOf(3,9,20,15,7), intArrayOf(9,3,15,20,7)))
+    val test = P106ConstructFromInPostOrder()
+    TreeUtil.printTreeNode(test.buildTree(intArrayOf(9,3,15,20,7), intArrayOf(9,15,7,20,3)))
 }
