@@ -1,9 +1,8 @@
-@file:JvmName("TreeNode")
+@file:JvmName("ListNode")
+
 package common
 
-class TreeNode(@JvmField var `val`: Int) {
+class ListNode(@JvmField var `val`: Int) {
     @JvmField
-    var left: TreeNode? = null
-    @JvmField
-    var right: TreeNode? = null
+    var next: ListNode? = null
 }
