@@ -1,4 +1,4 @@
-package other
+package bitoperator
 
 import kotlin.test.assertEquals
 
@@ -22,6 +22,14 @@ object P136SingleNumber {
                 set.add(num)
                 ans += num
             }
+        }
+        return ans
+    }
+
+    fun singleNumberSpaceO1(nums: IntArray): Int {
+        var ans = 1
+        for (num in nums) {
+            ans = ans xor num
         }
         return ans
     }

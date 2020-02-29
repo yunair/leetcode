@@ -1,4 +1,4 @@
-package other
+package bitoperator
 
 import kotlin.test.assertEquals
 
@@ -9,25 +9,26 @@ object P137SingleNumber2 {
     /**
      * 解决方案：
      *
-     * a^a^b = b
+     * a^b = a-b
      */
     fun singleNumber(nums: IntArray): Int {
-        val set = mutableSetOf<Int>()
-        var ans = 0
+        val map = mutableMapOf<Int, Int>()
         for (num in nums) {
-            if (set.contains(num)) {
-                ans -= num
-            } else {
-                set.add(num)
-                ans += num
+            map[num] = map.getOrDefault(num, 0) + 1
+        }
+
+        for (entry in map) {
+            if (entry.value == 1) {
+                return entry.key
             }
         }
-        return ans
+
+        return 0
     }
 
     @JvmStatic
     fun main(args: Array<String>) {
-        assertEquals(1, singleNumber(intArrayOf(2, 2, 1)))
-        assertEquals(4, singleNumber(intArrayOf(4, 1, 2, 2, 1)))
+        assertEquals(1, singleNumber(intArrayOf(2, 2, 2, 1)))
+        assertEquals(99, singleNumber(intArrayOf(0, 1, 0, 1, 0, 1, 99)))
     }
 }

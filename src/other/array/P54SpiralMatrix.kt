@@ -1,4 +1,4 @@
-package other
+package datastructure.array
 
 /**
  * 螺旋矩阵
