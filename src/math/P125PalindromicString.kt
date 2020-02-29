@@ -3,42 +3,38 @@ package math
 import kotlin.test.assertEquals
 
 /**
- * 回文数
+ * 验证回文串
  */
-object P9PalindromicNumber {
-    /**
-     * 数字是回文
-     * 1。 不能为负数
-     *
-     *
-     * 数字不转成字符串的做法:
-     *
-     * 不能反转全部，因为可能超过Int.MAX_VALUE
-     * 反转一半数字
-     * 比较前一半和后一半是否一致
-     *
-     * 将原始数字除以 10，然后给反转后的数字乘上 10，所以，当原始数字小于反转后的数字时，就意味着我们已经处理了一半位数的数字。
-     */
-    fun isPalindrome(x: Int): Boolean {
-        if (x < 0) {
-            return false
-        }
-        if (x < 10) {
+object P125PalindromicString {
+    fun isPalindrome(s: String): Boolean {
+        if (s.isEmpty() || s.length == 1) {
             return true
         }
-        val str = x.toString()
-        for (i in 0..(str.length / 2)) {
-            if (str[i] != str[str.length - 1 - i]) {
+
+        var front = 0
+        var end = s.length - 1
+        while (front < end) {
+            if (!s[front].isLetterOrDigit()) {
+                front++
+                continue
+            }
+
+            if (!s[end].isLetterOrDigit()) {
+                end--
+                continue
+            }
+            if (s[front].toLowerCase() != s[end].toLowerCase()) {
                 return false
             }
+            front++
+            end--
         }
         return true
     }
 
     @JvmStatic
     fun main(args: Array<String>) {
-        assertEquals(true, isPalindrome(121))
-        assertEquals(false, isPalindrome(-121))
-        assertEquals(false, isPalindrome(10))
+        assertEquals(true, isPalindrome("A man, a plan, a canal: Panama"))
+        assertEquals(false, isPalindrome("race a car"))
     }
 }

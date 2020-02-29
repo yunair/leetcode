@@ -1,28 +1,35 @@
 package math
 
+import common.ListNode
 import kotlin.test.assertEquals
 
-object P9Palindromic {
+/**
+ * 回文链表
+ */
+object P234PalindromicList {
     /**
-     * 数字是回文
-     * 1。 不能为负数
-     *
-     * 不能反转全部，因为可能超过Int.MAX_VALUE
-     * 反转一半数字
-     * 比较前一半和后一半是否一致
-     *
-     * 将原始数字除以 10，然后给反转后的数字乘上 10，所以，当原始数字小于反转后的数字时，就意味着我们已经处理了一半位数的数字。
+     * 能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
      */
-    fun isPalindrome(x: Int): Boolean {
-        if (x < 0) {
-            return false
-        }
-        if (x < 10) {
+    fun isPalindrome(head: ListNode?): Boolean {
+        if (head == null) {
             return true
         }
-        val str = x.toString()
-        for (i in 0..(str.length / 2)) {
-            if (str[i] != str[str.length - 1 - i]) {
+        if (head.next == null) {
+            return true
+        }
+
+        // 链表转线性表
+        var n = 0
+        var node = head
+        val list = mutableListOf<Int>()
+        while (node != null) {
+            n++
+            list.add(node.`val`)
+            node = node.next
+        }
+
+        for (i in 0..(n / 2)) {
+            if (list[i] != list[n - 1 - i]) {
                 return false
             }
         }
@@ -31,8 +38,17 @@ object P9Palindromic {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        assertEquals(true, isPalindrome(121))
-        assertEquals(false, isPalindrome(-121))
-        assertEquals(false, isPalindrome(10))
+        assertEquals(true, isPalindrome(buildList(intArrayOf(1, 2, 2, 1))))
+        assertEquals(false, isPalindrome(buildList(intArrayOf(1, 2))))
+    }
+
+    private fun buildList(arr: IntArray): ListNode {
+        val root = ListNode(arr[0])
+        var node = root
+        for (i in 1 until arr.size) {
+            node.next = ListNode(arr[i])
+            node = node.next!!
+        }
+        return root
     }
 }

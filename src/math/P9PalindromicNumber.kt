@@ -2,10 +2,16 @@ package math
 
 import kotlin.test.assertEquals
 
-object P9Palindromic {
+/**
+ * 回文数
+ */
+object P9PalindromicNumber {
     /**
      * 数字是回文
      * 1。 不能为负数
+     *
+     *
+     * 数字不转成字符串的做法:
      *
      * 不能反转全部，因为可能超过Int.MAX_VALUE
      * 反转一半数字
