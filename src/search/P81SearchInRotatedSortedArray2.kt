@@ -3,55 +3,17 @@ package search
 import kotlin.test.assertEquals
 
 /**
- * 搜索旋转排序数组
+ * 搜索旋转排序数组II
  */
-object P33SearchInRotatedSortedArray {
-    fun search(nums: IntArray, target: Int): Int {
-        return search(nums, target, 0, nums.size - 1)
+object P81SearchInRotatedSortedArray2 {
+    fun search(nums: IntArray, target: Int): Boolean {
+        return nums.contains(target)
     }
-
-    private fun search(nums: IntArray, target: Int, low: Int, high: Int): Int {
-        if (low > high) {
-            return -1
-        }
-        val mid = low + (high - low) / 2
-        if (nums[low] == target) {
-            return low
-        }
-        if (nums[high] == target) {
-            return high
-        }
-
-        when {
-            nums[mid] < target -> {
-                return if (nums[low] > nums[mid] && nums[high] < target) {
-                    // 从low到mid先增后从0开始增, 且最后的数小于target
-                    search(nums, target, low + 1, mid - 1)
-                } else {
-                    // mid到high先增后减
-                    search(nums, target, mid + 1, high - 1)
-                }
-            }
-            nums[mid] > target -> {
-                return if (nums[high] < nums[mid] && nums[low] > target) {
-                    // 从mid到high先增后从0开始增, 且最前的的数大于target
-                    search(nums, target, mid + 1, high - 1)
-                } else {
-                    // mid到high先增后减
-                    search(nums, target, low + 1, mid - 1)
-                }
-            }
-            else -> {
-                return mid
-            }
-        }
-    }
-
     @JvmStatic
     fun main(args: Array<String>) {
-        assertEquals(4, search(intArrayOf(4, 5, 6, 7, 0, 1, 2), 0))
-        assertEquals(-1, search(intArrayOf(4, 5, 6, 7, 0, 1, 2), 3))
-        assertEquals(3, search(intArrayOf(4, 5, 6, 7, 0, 1, 2), 7))
-        assertEquals(1, search(intArrayOf(5, 1, 2, 3, 4), 1))
+//        assertEquals(true, search(intArrayOf(2, 5, 6, 0, 0, 1, 2), 0))
+//        assertEquals(false, search(intArrayOf(2, 5, 6, 0, 0, 1, 2), 3))
+//        assertEquals(true, search(intArrayOf(1, 3, 1, 1, 1), 3))
+        assertEquals(true, search(intArrayOf(1, 1, 3, 1), 3))
     }
 }

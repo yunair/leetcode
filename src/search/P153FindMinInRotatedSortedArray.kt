@@ -5,53 +5,46 @@ import kotlin.test.assertEquals
 /**
  * 搜索旋转排序数组
  */
-object P33SearchInRotatedSortedArray {
-    fun search(nums: IntArray, target: Int): Int {
-        return search(nums, target, 0, nums.size - 1)
+object P153FindMinInRotatedSortedArray {
+    fun findMin(nums: IntArray): Int {
+        // 找到变化点，即为最小值
+        if (nums.size == 1) {
+            return nums[0]
+        }
+        var left = 0
+        var right = nums.size - 1
+        if (nums[right] > nums[0]) {
+            // 未变动的已排序数组
+            return nums[0]
+        }
+        while (left < right) {
+            val mid = left + (right - left) / 2
+            if (nums[mid] > nums[mid + 1]) {
+                return nums[mid + 1]
+            }
+            if (nums[mid - 1] > nums[mid]) {
+                return nums[mid]
+            }
+            // 非单调递增，一定是先增后从0开始增
+            if (nums[mid] > nums[0]) {
+                // 变化点在右侧
+                left = mid + 1
+            } else {
+                right = mid
+            }
+        }
+        return -1
+
     }
 
-    private fun search(nums: IntArray, target: Int, low: Int, high: Int): Int {
-        if (low > high) {
-            return -1
-        }
-        val mid = low + (high - low) / 2
-        if (nums[low] == target) {
-            return low
-        }
-        if (nums[high] == target) {
-            return high
-        }
-
-        when {
-            nums[mid] < target -> {
-                return if (nums[low] > nums[mid] && nums[high] < target) {
-                    // 从low到mid先增后从0开始增, 且最后的数小于target
-                    search(nums, target, low + 1, mid - 1)
-                } else {
-                    // mid到high先增后减
-                    search(nums, target, mid + 1, high - 1)
-                }
-            }
-            nums[mid] > target -> {
-                return if (nums[high] < nums[mid] && nums[low] > target) {
-                    // 从mid到high先增后从0开始增, 且最前的的数大于target
-                    search(nums, target, mid + 1, high - 1)
-                } else {
-                    // mid到high先增后减
-                    search(nums, target, low + 1, mid - 1)
-                }
-            }
-            else -> {
-                return mid
-            }
-        }
-    }
 
     @JvmStatic
     fun main(args: Array<String>) {
-        assertEquals(4, search(intArrayOf(4, 5, 6, 7, 0, 1, 2), 0))
-        assertEquals(-1, search(intArrayOf(4, 5, 6, 7, 0, 1, 2), 3))
-        assertEquals(3, search(intArrayOf(4, 5, 6, 7, 0, 1, 2), 7))
-        assertEquals(1, search(intArrayOf(5, 1, 2, 3, 4), 1))
+        assertEquals(1, findMin(intArrayOf(3, 4, 5, 1, 2)))
+        assertEquals(1, findMin(intArrayOf(2, 1)))
+        assertEquals(0, findMin(intArrayOf(4, 5, 6, 7, 0, 1, 2)))
+        assertEquals(1, findMin(intArrayOf(3, 1, 2)))
+        assertEquals(1, findMin(intArrayOf(2, 3, 4, 5, 1)))
+
     }
 }
