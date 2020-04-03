@@ -1,4 +1,4 @@
-package doublepoint
+package twopoint
 
 import common.ListNode
 import util.ListUtil

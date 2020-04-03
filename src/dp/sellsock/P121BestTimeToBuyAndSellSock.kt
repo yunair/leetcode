@@ -1,4 +1,4 @@
-package dp
+package dp.sellsock
 
 import kotlin.test.assertEquals
 
@@ -17,9 +17,7 @@ object P112BestTimeToBuyAndSellSock {
         var max = 0
         var min = prices[0]
         for (i in 1 until prices.size) {
-            if (prices[i] < min) {
-                min = prices[i]
-            }
+            min = minOf(min, prices[i])
             max = maxOf(max, prices[i] - min)
         }
         return max
@@ -27,9 +25,9 @@ object P112BestTimeToBuyAndSellSock {
     }
 
     /**
-     * 非动态规划版
+     * 代码不清晰版
      */
-    fun maxProfitNoDp(prices: IntArray): Int {
+    fun maxProfitNeedClear(prices: IntArray): Int {
         var max = 0
         if (prices.isEmpty()) {
             return 0
@@ -52,7 +50,6 @@ object P112BestTimeToBuyAndSellSock {
     fun main(args: Array<String>) {
         assertEquals(5, maxProfit(intArrayOf(7, 1, 5, 3, 6, 4)))
         assertEquals(0, maxProfit(intArrayOf(7, 6, 4, 3, 1)))
-        assertEquals(6, maxProfit(intArrayOf(1, 2, 7, 3, 1)))
-        assertEquals(5, maxProfit(intArrayOf(5, 2, 7, 1, 4)))
+        assertEquals(4, maxProfit(intArrayOf(1, 2, 3, 4, 5)))
     }
 }
