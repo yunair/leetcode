@@ -50,6 +50,14 @@ class MyArray<E>(capacity: Int) {
         return false
     }
 
+    fun removeLast(): E {
+        return removeAt(size - 1)
+    }
+
+    fun removeFirst(): E {
+        return removeAt(0)
+    }
+
     fun removeAll(e: E): Boolean {
         var index = indexOf(e)
         if (index == -1) {
@@ -65,6 +73,14 @@ class MyArray<E>(capacity: Int) {
     fun get(index: Int): E {
         checkIndexValid(index, "Get")
         return values[index]!!
+    }
+
+    fun getLast(): E {
+        return get(size - 1)
+    }
+
+    fun getFirst(): E {
+        return get(0)
     }
 
     fun set(index: Int, e: E) {

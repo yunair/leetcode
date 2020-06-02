@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 /**
  * 最小栈
  */
-class P155MinStack {
+class MinStack {
     /**
      * 将最小值和当前值合并为同一个元素
      * 获取min的时候只要peek().second即可
@@ -19,7 +19,6 @@ class P155MinStack {
             minValue = x
         }
         stack.push(Pair(x, minValue))
-
     }
 
     fun pop() {
@@ -27,6 +26,11 @@ class P155MinStack {
             return
         }
         stack.pop()
+        minValue = if (stack.isEmpty()) {
+            Int.MAX_VALUE
+        } else {
+            getMin()
+        }
     }
 
     fun top(): Int {
@@ -39,12 +43,19 @@ class P155MinStack {
 }
 
 fun main() {
-    val minStack = P155MinStack();
-    minStack.push(-2);
-    minStack.push(0);
-    minStack.push(-3);
-    assertEquals(-3, minStack.getMin()); //返回 -3.
-    minStack.pop();
+    val minStack = MinStack()
+    minStack.push(-10);
+    minStack.push(14);
+    assertEquals(-10, minStack.getMin()); //返回 -3.
+    assertEquals(-10, minStack.getMin()); //返回 -3.
+
+    minStack.push(-20);
+    assertEquals(-20, minStack.getMin()); //返回 -3.
+    assertEquals(-20, minStack.getMin()); //返回 -3.
+    assertEquals(-20, minStack.top()); //返回 -3.
+    assertEquals(-20, minStack.getMin()); //返回 -3.
+    minStack.pop()
+    minStack.push(-10)
     assertEquals(0, minStack.top()); //--> 返回 0.
     assertEquals(-2, minStack.getMin()); //--> 返回 -2.
 

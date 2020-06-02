@@ -11,7 +11,7 @@ class P225MyStack {
     private val origin = ArrayDeque<Int>()
     private val reverse = ArrayDeque<Int>()
 
-    /** Push element x onto stack. */
+    /** Push element x onto datastructure.stack. */
     fun push(x: Int) {
         if (reverse.isEmpty()) {
             reverse.push(x)
@@ -30,7 +30,7 @@ class P225MyStack {
         origin.clear()
     }
 
-    /** Removes the element on top of the stack and returns that element. */
+    /** Removes the element on top of the datastructure.stack and returns that element. */
     fun pop(): Int {
         return reverse.pop()
     }
@@ -40,7 +40,7 @@ class P225MyStack {
         return reverse.peek()
     }
 
-    /** Returns whether the stack is empty. */
+    /** Returns whether the datastructure.stack is empty. */
     fun empty(): Boolean {
         return reverse.isEmpty()
     }
