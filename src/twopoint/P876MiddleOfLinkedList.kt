@@ -1,4 +1,4 @@
-package datastructure
+package twopoint
 
 import common.ListNode
 import util.ListUtil
@@ -22,7 +22,32 @@ object P876MiddleOfLinkedList {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        println(middleNode(ListUtil.buildList(intArrayOf(1, 2, 3, 4, 5))))
-        println(middleNode(ListUtil.buildList(intArrayOf(1, 2, 3, 4, 5, 6))))
+        println(
+            middleNode(
+                ListUtil.buildList(
+                    intArrayOf(
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    )
+                )
+            )
+        )
+        println(
+            middleNode(
+                ListUtil.buildList(
+                    intArrayOf(
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6
+                    )
+                )
+            )
+        )
     }
 }
