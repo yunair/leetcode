@@ -1,17 +1,15 @@
 package backtrack
 
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
- * 组合总和
+ * 组合总和3
  */
-object P40CombinationSum2 {
+object P216CombinationSum3 {
     val ans = mutableListOf<List<Int>>()
-    fun combinationSum2(candidates: IntArray, target: Int): List<List<Int>> {
+    fun combinationSum3(k: Int, n: Int): List<List<Int>> {
         ans.clear()
-        Arrays.sort(candidates)
-        backtrack(candidates, 0, target, mutableListOf())
+        backtrack(1, k, n, mutableListOf())
         return ans
     }
 
@@ -19,42 +17,36 @@ object P40CombinationSum2 {
      * 剪枝策略:
      */
     private fun backtrack(
-        candidates: IntArray,
         start: Int,
+        maxLength: Int,
         target: Int,
         tracker: MutableList<Int>
     ) {
-        if (target == 0) {
-            val list = ArrayList(tracker)
-
-            ans.add(list)
-
+        if (tracker.size == maxLength) {
+            if (target == 0) {
+                val list = ArrayList(tracker)
+                ans.add(list)
+            }
             return
         }
 
-
-        for (i in start until candidates.size) {
-            val value = candidates[i]
+        for (i in start..9) {
             // 大剪枝
-            if (target - value < 0) {
+            if (target - i < 0) {
                 break
             }
-            // 小剪枝
-            if (i > start && value == candidates[i - 1]) {
-                continue;
-            }
 
-            tracker.add(value)
-
-            backtrack(candidates, i + 1, target - value, tracker)
-
-            tracker.remove(value)
+            tracker.add(i)
+            backtrack(i + 1, maxLength, target - i, tracker)
+            tracker.remove(i)
         }
     }
 
     @JvmStatic
     fun main(args: Array<String>) {
-        println(combinationSum2(intArrayOf(10, 1, 2, 7, 6, 1, 5), 8))
-        println(combinationSum2(intArrayOf(2, 5, 2, 1, 2), 5))
+        println(combinationSum3(3, 7))
+        println(combinationSum3(3, 9))
+        println(combinationSum3(3, 2))
+        println(combinationSum3(2, 18))
     }
 }

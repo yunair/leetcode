@@ -4,7 +4,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 /**
- * 组合总和
+ * 组合总和2
  */
 object P40CombinationSum2 {
     val ans = mutableListOf<List<Int>>()

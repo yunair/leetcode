@@ -25,14 +25,17 @@ object P47Permutations2 {
     private fun backtrack(nums: IntArray, tracker: ArrayDeque<Int>, visited: BooleanArray) {
         if (tracker.size == nums.size) {
             val list = ArrayList(tracker)
-            if (!ans.contains(list)) {
-                ans.add(list)
-            }
+            ans.add(list)
             return
         }
         for (i in nums.indices) {
             if (visited[i]) {
                 continue
+            }
+            // 二段剪枝，之前用过的数字不需要再次使用
+            // 写 !used[i - 1] 是因为 nums[i - 1] 在深度优先遍历的过程中刚刚被撤销选择
+            if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) {
+                continue;
             }
             val num = nums[i]
 
