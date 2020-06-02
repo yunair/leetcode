@@ -1,4 +1,4 @@
-package other.dfs
+package datastructure.dfs
 
 import kotlin.test.assertEquals
 

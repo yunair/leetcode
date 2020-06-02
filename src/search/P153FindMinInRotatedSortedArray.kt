@@ -17,7 +17,7 @@ object P153FindMinInRotatedSortedArray {
             // 未变动的已排序数组
             return nums[0]
         }
-        while (left < right) {
+        while (left <= right) {
             val mid = left + (right - left) / 2
             if (nums[mid] > nums[mid + 1]) {
                 return nums[mid + 1]

@@ -21,28 +21,23 @@ object P33SearchInRotatedSortedArray {
         if (nums[high] == target) {
             return high
         }
+        if (nums[mid] == target) {
+            return mid
+        }
 
-        when {
-            nums[mid] < target -> {
-                return if (nums[low] > nums[mid] && nums[high] < target) {
-                    // 从low到mid先增后从0开始增, 且最后的数小于target
-                    search(nums, target, low + 1, mid - 1)
-                } else {
-                    // mid到high先增后减
-                    search(nums, target, mid + 1, high - 1)
-                }
+        return if (nums[low] < nums[mid]) {
+            // 左半边有序
+            if (nums[low] < target && nums[mid] > target) {
+                search(nums, target, low + 1, mid - 1)
+            } else {
+                search(nums, target, mid + 1, high - 1)
             }
-            nums[mid] > target -> {
-                return if (nums[high] < nums[mid] && nums[low] > target) {
-                    // 从mid到high先增后从0开始增, 且最前的的数大于target
-                    search(nums, target, mid + 1, high - 1)
-                } else {
-                    // mid到high先增后减
-                    search(nums, target, low + 1, mid - 1)
-                }
-            }
-            else -> {
-                return mid
+        } else {
+            // 右半边有序
+            if (nums[mid] < target && nums[high] > target) {
+                search(nums, target, mid + 1, high - 1)
+            } else {
+                search(nums, target, low + 1, mid - 1)
             }
         }
     }

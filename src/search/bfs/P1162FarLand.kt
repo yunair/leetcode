@@ -1,4 +1,4 @@
-package other.bfs
+package datastructure.bfs
 
 import java.util.*
 import kotlin.math.abs

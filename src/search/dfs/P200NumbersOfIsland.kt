@@ -1,4 +1,4 @@
-package other.dfs
+package datastructure.dfs
 
 import kotlin.test.assertEquals
 
@@ -28,10 +28,7 @@ object P200NumbersOfIsland {
         }
         for (i in grid.indices) {
             for (j in grid[0].indices) {
-                if (grid[i][j] == '0') {
-                    continue
-                }
-                if(visited[i][j]){
+                if (grid[i][j] == '0' || visited[i][j]) {
                     continue
                 }
                 visited[i][j] = true
@@ -50,10 +47,10 @@ object P200NumbersOfIsland {
         for (dir in dirs) {
             val aimRow = row + dir[0]
             val aimCol = col + dir[1]
-            if (aimRow < 0 || aimRow >= grid.size || aimCol < 0 || aimCol >= grid[0].size) {
+            if (aimRow < 0 || aimRow >= grid.size || aimCol < 0 || aimCol >= grid[0].size || visited[aimRow][aimCol]) {
                 continue
             }
-            if (!visited[aimRow][aimCol] && grid[aimRow][aimCol] == '1') {
+            if (grid[aimRow][aimCol] == '1') {
                 visited[aimRow][aimCol] = true
                 dfs(grid, aimRow, aimCol, visited)
             }

@@ -1,4 +1,4 @@
-package other.bfs
+package datastructure.bfs
 
 import java.util.*
 import kotlin.collections.HashSet
@@ -16,7 +16,6 @@ object P127WordLadder {
         val queue = LinkedList<String>()
         queue.add(beginWord)
         // use int instead
-//        val visited = mutableSetOf<String>()
         val visited = BooleanArray(wordList.size + 1)
         var count = 0
         while (queue.isNotEmpty()) {
