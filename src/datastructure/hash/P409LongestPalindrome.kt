@@ -1,4 +1,4 @@
-package other.hash
+package datastructure.hash
 
 import kotlin.test.assertEquals
 

@@ -1,6 +1,4 @@
-package other.array
-
-import kotlin.test.assertEquals
+package datastructure.array
 
 /**
  * 求众数 II

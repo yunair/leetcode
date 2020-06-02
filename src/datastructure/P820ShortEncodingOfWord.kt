@@ -1,9 +1,7 @@
-package other
+package datastructure
 
-import jdk.nashorn.internal.runtime.JSONFunctions
 import java.lang.StringBuilder
 import java.util.*
-import kotlin.Comparator
 import kotlin.test.assertEquals
 
 /**

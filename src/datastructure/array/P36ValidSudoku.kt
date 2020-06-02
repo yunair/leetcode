@@ -1,4 +1,4 @@
-package other.array
+package datastructure.array
 
 import kotlin.test.assertEquals
 

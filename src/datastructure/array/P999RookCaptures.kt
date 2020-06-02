@@ -1,4 +1,4 @@
-package other.array
+package datastructure.array
 
 /**
  * 车的可用捕获量

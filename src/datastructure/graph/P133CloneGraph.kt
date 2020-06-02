@@ -1,4 +1,4 @@
-package other.graph
+package datastructure.graph
 
 import java.util.*
 import kotlin.collections.ArrayList

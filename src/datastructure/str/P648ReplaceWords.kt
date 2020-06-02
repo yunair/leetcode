@@ -1,4 +1,4 @@
-package datastructure
+package datastructure.str
 
 import kotlin.test.assertEquals
 
@@ -22,6 +22,11 @@ object P648ReplaceWords {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        assertEquals("the cat was rat by the bat", replaceWords(listOf("cat", "bat", "rat"), "the cattle was rattled by the battery"))
+        assertEquals("the cat was rat by the bat",
+            replaceWords(
+                listOf("cat", "bat", "rat"),
+                "the cattle was rattled by the battery"
+            )
+        )
     }
 }

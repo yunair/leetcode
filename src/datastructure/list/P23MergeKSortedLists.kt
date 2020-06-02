@@ -1,4 +1,4 @@
-package datastructure
+package datastructure.list
 
 import common.ListNode
 import util.ListUtil

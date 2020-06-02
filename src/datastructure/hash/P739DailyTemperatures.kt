@@ -1,4 +1,4 @@
-package other.hash
+package datastructure.hash
 
 import java.util.*
 

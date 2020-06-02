@@ -1,6 +1,4 @@
-package other.array
-
-import other.Temp
+package datastructure.array
 
 /**
  * 旋转图像

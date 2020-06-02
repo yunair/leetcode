@@ -1,4 +1,4 @@
-package other
+package datastructure
 
 /**
  * 两数之和

@@ -1,4 +1,4 @@
-package other
+package datastructure
 
 /**
  * 分糖果 II

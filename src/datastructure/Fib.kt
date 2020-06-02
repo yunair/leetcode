@@ -1,4 +1,4 @@
-package other
+package datastructure
 
 object Fib {
     fun fib(N: Int): Int {

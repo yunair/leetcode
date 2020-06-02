@@ -1,4 +1,4 @@
-package other.array
+package datastructure.array
 
 /**
  *  合并两个有序数组

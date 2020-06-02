@@ -1,6 +1,5 @@
-package other.str
+package datastructure.str
 
-import java.lang.StringBuilder
 import kotlin.test.assertEquals
 
 /**

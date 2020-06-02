@@ -1,6 +1,5 @@
-package other.str
+package datastructure.str
 
-import contest.Weekly185
 import kotlin.test.assertEquals
 
 object P5390CroakFrogs {

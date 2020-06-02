@@ -1,4 +1,4 @@
-package datastructure
+package datastructure.str
 
 import kotlin.test.assertEquals
 
