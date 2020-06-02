@@ -22,6 +22,11 @@ object TreeUtil {
     }
 
     @JvmStatic
+    fun toTree(vararg items: Int?): TreeNode? {
+        return buildTree(items as Array<Int?>)
+    }
+
+    @JvmStatic
     fun buildTree(array: Array<Int?>): TreeNode? {
         if (array.isEmpty()) {
             return null

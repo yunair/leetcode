@@ -4,6 +4,11 @@ import common.ListNode
 
 object ListUtil {
     @JvmStatic
+    fun toList(vararg array: Int): ListNode? {
+        return buildList(array)
+    }
+
+    @JvmStatic
     fun buildList(array: IntArray): ListNode? {
         if (array.isEmpty()) {
             return null
@@ -26,8 +31,12 @@ object ListUtil {
         }
         var node: ListNode? = head
         while (node != null) {
-            println(node.`val`)
+            print(node.`val`)
+            if (node.next != null) {
+                print(" -> ")
+            }
             node = node.next
         }
+        println()
     }
 }
