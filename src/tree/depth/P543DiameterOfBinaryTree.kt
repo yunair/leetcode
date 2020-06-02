@@ -1,8 +1,7 @@
-package tree
+package tree.depth
 
 import common.TreeNode
 import util.TreeUtil
-import java.util.*
 import kotlin.test.assertEquals
 
 /**
@@ -33,7 +32,19 @@ object P543DiameterOfBinaryTree {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        assertEquals(3, diameterOfBinaryTree(TreeUtil.buildTree(arrayOf(1, 2, 3, 4, 5))))
+        assertEquals(3,
+            diameterOfBinaryTree(
+                TreeUtil.buildTree(
+                    arrayOf(
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    )
+                )
+            )
+        )
         assertEquals(
             7,
             diameterOfBinaryTree(

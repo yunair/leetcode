@@ -14,7 +14,6 @@ class P297SerializeAndDeserializeBinaryTree {
         if (root == null) {
             return null;
         }
-        List<Integer> result = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         StringBuilder sb = new StringBuilder();
@@ -66,11 +65,7 @@ class P297SerializeAndDeserializeBinaryTree {
     }
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
-        root.right.left = new TreeNode(4);
-        root.right.right = new TreeNode(5);
+        TreeNode root = TreeUtil.buildTree(new Integer[]{1, 2, 3, null, null, 4, 5});
         P297SerializeAndDeserializeBinaryTree codec = new P297SerializeAndDeserializeBinaryTree();
         String result = codec.serialize(root);
         System.out.println(result);

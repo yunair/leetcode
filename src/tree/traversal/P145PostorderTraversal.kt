@@ -5,26 +5,26 @@ import util.TreeUtil
 import java.util.*
 
 /**
- * 二叉树的前序遍历
+ * 二叉树的后序遍历
  */
-object P144PreorderTraversal {
-    fun preorderTraversal(root: TreeNode?): List<Int> {
+object P145PostorderTraversal {
+    fun postorderTraversal(root: TreeNode?): List<Int> {
         val ans = mutableListOf<Int>()
-        preorder(root, ans)
+        postorder(root, ans)
         return ans
     }
 
-    private fun preorder(node: TreeNode?, list: MutableList<Int>) {
+    private fun postorder(node: TreeNode?, list: MutableList<Int>) {
         if (node == null) {
             return
         }
 
+        postorder(node.left, list)
+        postorder(node.right, list)
         list.add(node.`val`)
-        preorder(node.left, list)
-        preorder(node.right, list)
     }
 
-    fun preorderTraversalIter(root: TreeNode?): List<Int> {
+    fun postorderTraversalIter(root: TreeNode?): List<Int> {
         val ans = mutableListOf<Int>()
         if (root == null) {
             return ans
@@ -33,11 +33,11 @@ object P144PreorderTraversal {
         stack.push(root)
         while (stack.isNotEmpty()) {
             val node = stack.pop()
-            ans.add(node.`val`)
-            node.right?.let {
+            ans.add(0, node.`val`)
+            node.left?.let {
                 stack.push(it)
             }
-            node.left?.let {
+            node.right?.let {
                 stack.push(it)
             }
         }
@@ -46,6 +46,6 @@ object P144PreorderTraversal {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        println(preorderTraversalIter(TreeUtil.buildTree(arrayOf(1, null, 2, 3))))
+        println(postorderTraversalIter(TreeUtil.buildTree(arrayOf(1, null, 2, 3))))
     }
 }

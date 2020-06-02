@@ -1,41 +1,51 @@
 package tree.bst
 
+import common.ListNode
 import common.TreeNode
+import util.ListUtil
 import util.TreeUtil
 
 /**
- * 将有序数组转换为二叉搜索树
+ * 有序链表转换二叉搜索树
  */
-object P108ConvertSortedListToBST {
-    fun sortedArrayToBST(nums: IntArray): TreeNode? {
-        if (nums.isEmpty()) {
-            return null
-        }
-
-
-        return build(nums, 0, nums.size - 1)
+object P109ConvertSortedListToBST {
+    /**
+     * 双指针找中间节点
+     */
+    fun sortedListToBST(head: ListNode?): TreeNode? {
+        return build(head)
     }
 
-    private fun build(nums: IntArray, start: Int, end: Int): TreeNode? {
-        if (start > end) {
+    private fun build(head: ListNode?): TreeNode? {
+        if (head == null) {
             return null
         }
-        val mid = (start + end) / 2
-        val root = TreeNode(nums[mid])
-        val left = build(nums, start, mid - 1)
-        val right = build(nums, mid + 1, end)
-        if (left != null) {
-            root.left = left
+        var quick = head
+        var slow = head
+        var preSlow: ListNode? = null
+        while (quick != null) {
+            if (quick.next?.next == null) {
+                break
+            }
+            quick = quick.next!!.next
+            preSlow = slow
+            slow = slow!!.next
         }
-        if (right != null) {
-            root.right = right
+
+        val root = TreeNode(slow!!.`val`)
+        // 剪断链表
+        preSlow?.next = null
+        if (slow != head) {
+            root.left = build(head)
         }
+        root.right = build(slow.next)
+
         return root
     }
 
     @JvmStatic
     fun main(args: Array<String>) {
-        TreeUtil.printTreeNode(sortedArrayToBST(intArrayOf(-10, -3, 0, 5, 9)))
-        TreeUtil.printTreeNode(sortedArrayToBST(intArrayOf(0, 1, 2, 3, 4, 5)))
+        TreeUtil.printTreeNode(sortedListToBST(ListUtil.buildList(intArrayOf(-10, -3, 0, 5, 9))))
+        TreeUtil.printTreeNode(sortedListToBST(ListUtil.buildList(intArrayOf(0, 1, 2, 3, 4, 5))))
     }
 }

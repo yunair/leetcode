@@ -3,7 +3,10 @@ package tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class P116FillNodeNext {
+/**
+ * 填充每个节点的下一个右侧节点指针
+ */
+class P116FillNodeFullBinaryTree {
     static class Node {
         public int val;
         public Node left;
@@ -56,18 +59,18 @@ class P116FillNodeNext {
         queue.add(root);
         while (!queue.isEmpty()) {
             final int size = queue.size();
-            Node prev = null;
             for (int i = 0; i < size; i++) {
                 final Node node = queue.poll();
-                if (node == null) {
-                    continue;
+                assert node != null;
+                if (i < size - 1) {
+                    node.next = queue.peek();
                 }
-                queue.add(node.left);
-                queue.add(node.right);
-                if (prev != null) {
-                    prev.next = node;
+                if (node.left != null) {
+                    queue.add(node.left);
                 }
-                prev = node;
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
             }
         }
 

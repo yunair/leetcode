@@ -3,7 +3,10 @@ package tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class P116FillNodeFullBinaryTree {
+/**
+ * 填充每个节点的下一个右侧节点指针 II
+ */
+class P117FillNodeBinaryTree {
     static class Node {
         public int val;
         public Node left;
@@ -26,51 +29,97 @@ class P116FillNodeFullBinaryTree {
     }
 
     /**
-     * 把完美二叉树劈成两半，先处理大的两半二叉树中间的左右连接，然后递归处理小的连接
+     * 迭代，保存父Node，用父Node的next项链
      */
     public Node connect(Node root) {
         if (root == null) {
             return null;
         }
-        Node left = root.left;
-        Node right = root.right;
-        while (left != null) {
-            left.next = right;
-            left = left.right;
-            right = right.left;
+        Node pre = root;
+        while (pre != null) {
+            Node cur = pre;
+            while (cur != null) {
+                if (cur.left != null) {
+                    cur.left.next = cur.right;
+                }
+                Node curNext = cur.next;
+                // 找到一横排中有子节点的节点
+                while (curNext != null && (curNext.left == null && curNext.right == null)) {
+                    curNext = curNext.next;
+                }
+                if (curNext != null) {
+                    final Node curNextLeaf;
+                    if (curNext.left != null) {
+                        curNextLeaf = curNext.left;
+                    } else {
+                        curNextLeaf = curNext.right;
+                    }
+                    if (cur.right == null) {
+                        if (cur.left != null) {
+                            cur.left.next = curNextLeaf;
+                        }
+                    } else {
+                        cur.right.next = curNextLeaf;
+                    }
+                }
+
+                cur = cur.next;
+            }
+
+            Node preNext = pre;
+            Node next = null;
+            while (next == null && preNext != null) {
+                next = preNext.left;
+                if (next == null) {
+                    next = preNext.right;
+                }
+                preNext = preNext.next;
+            }
+            pre = next;
         }
-        connect(root.left);
-        connect(root.right);
 
         return root;
     }
 
-    /**
-     * BFS遍历
-     */
-    public Node connectUseNSpace(Node root) {
-        if (root == null) {
-            return null;
-        }
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.right = new Node(6);
+        root.left.left.left = new Node(7);
+        root.right.right.right = new Node(8);
+
+        P117FillNodeBinaryTree test = new P117FillNodeBinaryTree();
+        test.connect(root);
+        println(root);
+    }
+
+    private static void println(Node node) {
         Queue<Node> queue = new LinkedList<>();
-        queue.add(root);
+        if (node == null) {
+            return;
+        }
+        queue.add(node);
         while (!queue.isEmpty()) {
-            final int size = queue.size();
-            Node prev = null;
-            for (int i = 0; i < size; i++) {
-                final Node node = queue.poll();
-                if (node == null) {
-                    continue;
-                }
-                queue.add(node.left);
-                queue.add(node.right);
-                if (prev != null) {
-                    prev.next = node;
-                }
-                prev = node;
+            Node current = queue.poll();
+            if (current == null) {
+                System.out.print("#,");
+                continue;
+            }
+            System.out.print(current.val + ",");
+            Node next = current.next;
+            while (next != null) {
+                System.out.print(next.val + ",");
+                next = next.next;
+            }
+            if (current.left != null) {
+                queue.add(current.left);
+            } else {
+                queue.add(current.right);
             }
         }
 
-        return root;
     }
 }

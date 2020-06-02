@@ -1,0 +1,4 @@
+package design
+
+class FirstUnique {
+}

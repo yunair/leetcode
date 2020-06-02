@@ -4,7 +4,7 @@ import common.TreeNode
 import util.TreeUtil
 
 /**
- * 从前序与中序遍历序列构造二叉树
+ * 从中序与后序遍历序列构造二叉树
  */
 class P106ConstructFromInPostOrder {
     /**
