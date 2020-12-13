@@ -1,0 +1,4 @@
+package datastructure
+
+object StringIsRepresentNumber {
+}

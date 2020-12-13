@@ -18,7 +18,6 @@ object TreeUtil {
         }
         printTreeNode(node.left, level + 1)
         printTreeNode(node.right, level + 1)
-
     }
 
     @JvmStatic
